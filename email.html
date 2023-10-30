@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h2>Formulário</h2>
+
+    <form action="http://localhost:3001/sendmail" method="POST">
+        <div class="form-group">
+            <label for="email">Destinatário:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dataEntrega">Data de Entrega:</label>
+            <input type="date" id="dataEntrega" name="dataEntrega" required>
+        </div>
+
+        <div class="form-group">
+            <label for="responsavel">Nome do Responsável pela Entrega:</label>
+            <input type="text" id="responsavel" name="responsavel" required>
+        </div>
+
+        <div class="form-group">
+            <label for="receptor">Nome do Receptor:</label>
+            <input type="text" id="receptor" name="receptor" required>
+        </div>
+
+        <div class="form-group">
+            <label for="departamento">Departamento/Setor:</label>
+            <input type="text" id="departamento" name="departamento" required>
+        </div>
+
+        <div class="form-group">
+            <label for="observacoes">Observações:</label>
+            <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+        </div>
+
+        <button type="submit">Enviar</button>
+        <button type="submit">Limpar</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>
