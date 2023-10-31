@@ -27,6 +27,11 @@
         </div>
 
         <div class="form-group">
+            <label for="dataDevolução">Data de Devolução</label>
+            <input type="date" id="dataDevolução" name="dataEntrega"> 
+        </div>
+
+        <div class="form-group">
             <label for="responsavel">Nome do Responsável pela Entrega:</label>
             <input type="text" id="responsavel" name="responsavel" required>
         </div>
@@ -43,13 +48,24 @@
 
         <div class="form-group">
             <label for="observacoes">Observações:</label>
-            <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+            <textarea id="observacoes" name="observacoes" rows="3" required></textarea>
         </div>
 
         <button type="submit">Enviar</button>
-        <button type="submit">Limpar</button>
+        <button type="button" onclick="limparFormulario()">Limpar</button>
+
     </form>
-    <script src="script.js"></script>
+    <script>
+        function limparFormulario() {
+            document.getElementById("email").value = "";
+            document.getElementById("modelo").value = "";
+            document.getElementById("dataEntrega").value = "";
+            document.getElementById("responsavel").value = "";
+            document.getElementById("receptor").value = "";
+            document.getElementById("departamento").value = "";
+            document.getElementById("observacoes").value = "";
+        }        
+    </script>
 </body>
 
 </html>

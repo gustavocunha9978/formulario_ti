@@ -24,7 +24,7 @@ app.post("/sendmail", async (request, response) => {
     try {
         let message = await transport.sendMail({
             from: '"Gustavo Cunha" <ti@sorrisodetoledo.com.br>',
-            to: "estatistica@sorrisodetoledo.com.br, ti@sorrisodetoledo.com.br ", // mudar o email aqui 
+            to: "telemetria@sorrisodetoledo.com.br, ti@sorrisodetoledo.com.br ", // mudar o email aqui 
             subject: "Formulário",
             text: `
                 Modelo: ${formData.modelo}
