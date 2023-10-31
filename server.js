@@ -11,6 +11,7 @@ app.post("/sendmail", async (request, response) => {
 
     
     const formData = request.body;
+    const mail = formData.emailget;  
 
     const transport = nodemailer.createTransport({
         host: "smtp.emailarray.com",
@@ -24,7 +25,7 @@ app.post("/sendmail", async (request, response) => {
     try {
         let message = await transport.sendMail({
             from: '"Gustavo Cunha" <ti@sorrisodetoledo.com.br>',
-            to: "telemetria@sorrisodetoledo.com.br, ti@sorrisodetoledo.com.br ", // mudar o email aqui 
+             to: `${mail}, ti@sorrisodetoledo.com.br`,// mudar o email aqui 
             subject: "Formulário",
             text: `
                 Modelo: ${formData.modelo}
