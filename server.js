@@ -18,7 +18,8 @@ app.post("/sendmail", async (request, response) => {
     console.log(request.body);
     
     const formData = request.body;
-    const mail = formData.emailget;
+    const mail = formData.emailget;  
+
 
     const transport = nodemailer.createTransport({
         host: "smtp.emailarray.com",
@@ -51,7 +52,6 @@ app.post("/sendmail", async (request, response) => {
     }
 });
 
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(absolutePath, 'index.html'));
 });
@@ -59,4 +59,3 @@ app.get('/', (req, res) => {
 const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server on http://10.0.8.121:${PORT}`);
-});
