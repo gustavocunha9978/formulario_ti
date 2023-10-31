@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="server.js"> </script>
 </head>
 
 <body>
@@ -13,12 +14,12 @@
     <form action="http://localhost:3001/sendmail" method="POST">
         <div class="form-group">
             <label for="email">Destinatário:</label>
-            <input type="emailid" id="emailid" name="emailid" required>
+            <input type="emailget" id="emailget" name="emailget" required>
         </div>
 
         <div class="form-group">
-            <label for="modelo">Modelo:</label>
-            <input type="text" id="modelo" name="modelo" required>
+            <label for="Item">Item:</label>
+            <input type="text" id="Item" name="Item" required>
         </div>
 
         <div class="form-group">
@@ -28,8 +29,9 @@
 
         <div class="form-group">
             <label for="dataDevolução">Data de Devolução</label>
-            <input type="date" id="dataDevolução" name="dataEntrega"> 
+            <input type="date" id="dataDevolução" name="dataDevolução"> 
         </div>
+
 
         <div class="form-group">
             <label for="responsavel">Nome do Responsável pela Entrega:</label>
@@ -48,7 +50,7 @@
 
         <div class="form-group">
             <label for="observacoes">Observações:</label>
-            <textarea id="observacoes" name="observacoes" rows="3" required></textarea>
+            <textarea id="observacoes" name="observacoes" rows="3"></textarea>
         </div>
 
         <button type="submit">Enviar</button>
@@ -57,9 +59,10 @@
     </form>
     <script>
         function limparFormulario() {
-            document.getElementById("email").value = "";
-            document.getElementById("modelo").value = "";
+            document.getElementById("emailget").value = "";
+            document.getElementById("item").value = "";
             document.getElementById("dataEntrega").value = "";
+            document.getElementById("dataDevolução").value = "";
             document.getElementById("responsavel").value = "";
             document.getElementById("receptor").value = "";
             document.getElementById("departamento").value = "";
