@@ -1,17 +1,25 @@
 const nodemailer = require("nodemailer");
 const express = require("express");
-const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 require ('dotenv').config();
+
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+const absolutePath = "C:\\Users\\gustavo.santos\\Documents\\GitHub\\formulario_ti_v2";
+
+
+app.use(express.static(absolutePath));
+
 app.post("/sendmail", async (request, response) => {
     console.log(request.body);
-
     
     const formData = request.body;
     const mail = formData.emailget;  
+
 
     const transport = nodemailer.createTransport({
         host: "smtp.emailarray.com",
@@ -28,7 +36,7 @@ app.post("/sendmail", async (request, response) => {
              to: `${mail}, ti@sorrisodetoledo.com.br`,// mudar o email aqui 
             subject: "Formulário",
             text: `
-                Modelo: ${formData.modelo}
+                Item: ${formData.Item}
                 Data de Entrega: ${formData.dataEntrega}
                 Nome do Responsável pela Entrega: ${formData.responsavel}
                 Nome do Receptor: ${formData.receptor}
@@ -36,6 +44,7 @@ app.post("/sendmail", async (request, response) => {
                 Observações: ${formData.observacoes}
             `
         });
+        
         response.send("Deu boa!");
     } catch (error) {
         console.error("Erro ao enviar o email:", error);
@@ -43,6 +52,10 @@ app.post("/sendmail", async (request, response) => {
     }
 });
 
-app.listen(3001, () => {
-    console.log("Rodando!");
+app.get('/', (req, res) => {
+    res.sendFile(path.join(absolutePath, 'index.html'));
 });
+
+const PORT = 3001;
+app.listen(PORT, () => {
+    console.log(`Server on http://10.0.8.121:${PORT}`);
