@@ -9,6 +9,11 @@ require('dotenv').config();
 const absolutePath = "C:\\Users\\gustavo.santos\\Documents\\GitHub\\formulario_ti_v2";
 
 app.use(express.static(absolutePath));
+const path = require('path');
+require ('dotenv').config();
+
+const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/sendmail", async (req, res) => {
@@ -30,8 +35,10 @@ app.post("/sendmail", async (req, res) => {
         let message = await transport.sendMail({
             from: '"Gustavo Cunha" <ti@sorrisodetoledo.com.br>',
             to: `${mail}, ti@sorrisodetoledo.com.br`, 
+             to: `${mail}, ti@sorrisodetoledo.com.br`,// mudar o email aqui 
             subject: "Formulário",
             text: `
+                Item: ${formData.Item}
                 Item: ${formData.Item}
                 Data de Entrega: ${formData.dataEntrega}
                 Data de Devolução: ${fomatData.dataDevolução}
@@ -41,6 +48,7 @@ app.post("/sendmail", async (req, res) => {
                 Observações: ${formData.observacoes}
             `
         });
+        
 
         response.send("Deu boa!");
     } catch (error) {
@@ -56,4 +64,6 @@ app.get('/', (req, res) => {
 const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server on http://10.200.61.180:${PORT}`);
+app.get('/', (req, res) => {
+    res.sendFile(path.join(absolutePath, 'index.html'));
 });
