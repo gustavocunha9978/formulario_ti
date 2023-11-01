@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="server.js"> </script>
 </head>
 
 <body>
@@ -13,12 +14,12 @@
     <form action="http://localhost:3001/sendmail" method="POST">
         <div class="form-group">
             <label for="email">Destinatário:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="emailget" id="emailget" name="emailget" required>
         </div>
 
         <div class="form-group">
-            <label for="modelo">Modelo:</label>
-            <input type="text" id="modelo" name="modelo" required>
+            <label for="Item">Item:</label>
+            <input type="text" id="Item" name="Item" required>
         </div>
 
         <div class="form-group">
@@ -26,9 +27,25 @@
             <input type="date" id="dataEntrega" name="dataEntrega" required>
         </div>
 
-        <div class="form-group">
+
+        <div class="checkbox-wrapper">
+            <input id="terms-checkbox-37" name="checkbox" type="checkbox">
+            <label class="terms-label" for="terms-checkbox-37">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 200 200" class="checkbox-svg">
+                    <mask fill="white" id="path-1-inside-1_476_5-37">
+                        <rect height="200" width="200"></rect>
+                    </mask>
+                    <rect mask="url(#path-1-inside-1_476_5-37)" stroke-width="40" class="checkbox-box" height="200"
+                        width="200"></rect>
+                    <path stroke-width="15" d="M52 111.018L76.9867 136L149 64" class="checkbox-tick"></path>
+                </svg>
+                <span class="label-text">Devolução</span>
+            </label>
+        </div>
+
+        <div class="form-group" id="divDataDevolucao" style="display: none;">
             <label for="dataDevolução">Data de Devolução</label>
-            <input type="date" id="dataDevolução" name="dataEntrega"> 
+            <input type="date" id="dataDevolução" name="dataDevolução">
         </div>
 
         <div class="form-group">
@@ -48,7 +65,7 @@
 
         <div class="form-group">
             <label for="observacoes">Observações:</label>
-            <textarea id="observacoes" name="observacoes" rows="3" required></textarea>
+            <textarea id="observacoes" name="observacoes" rows="3"></textarea>
         </div>
 
         <button type="submit">Enviar</button>
@@ -57,14 +74,25 @@
     </form>
     <script>
         function limparFormulario() {
-            document.getElementById("email").value = "";
-            document.getElementById("modelo").value = "";
+            document.getElementById("emailget").value = "";
+            document.getElementById("item").value = "";
             document.getElementById("dataEntrega").value = "";
+            document.getElementById("dataDevolução").value = "";
             document.getElementById("responsavel").value = "";
             document.getElementById("receptor").value = "";
             document.getElementById("departamento").value = "";
             document.getElementById("observacoes").value = "";
-        }        
+        }
+
+
+        document.getElementById('terms-checkbox-37').addEventListener('change', function () {
+            const divDataDevolucao = document.getElementById('divDataDevolucao');
+            if (this.checked) {
+                divDataDevolucao.style.display = "block";
+            } else {
+                divDataDevolucao.style.display = "none";
+            }
+        });
     </script>
 </body>
 
