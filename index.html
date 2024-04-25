@@ -42,9 +42,9 @@
             </label>
         </div>
 
-        <div class="form-group" id="divDataDevolucao" style="display: none;">
-            <label for="dataDevolução">Data de Devolução</label>
-            <input type="date" id="dataDevolução" name="dataEntrega"> 
+        <div class="form-group" id="divDataDevolução" style="display: none;">
+            <label for="Devolução">Data de Devolução</label>
+            <input type="date" id="dataDevolução" name="dataDevolução"> 
         </div>
 
 
@@ -75,7 +75,7 @@
     <script>
         function limparFormulario() {
             document.getElementById("emailget").value = "";
-            document.getElementById("item").value = "";
+            document.getElementById("Item").value = ""; 
             document.getElementById("dataEntrega").value = "";
             document.getElementById("dataDevolução").value = "";
             document.getElementById("responsavel").value = "";
@@ -84,15 +84,21 @@
             document.getElementById("observacoes").value = "";
         }
 
-
         document.getElementById('terms-checkbox-37').addEventListener('change', function () {
-            const divDataDevolucao = document.getElementById('divDataDevolucao');
+            const divDataDevolução = document.getElementById('divDataDevolução');
             if (this.checked) {
-                divDataDevolucao.style.display = "block";
+                divDataDevolução.style.display = "block";
             } else {
-                divDataDevolucao.style.display = "none";
+                divDataDevolução.style.display = "none";
             }
         });
+
+        document.getElementById('formEmail').addEventListener('submit', function (event) {
+            const dataEntrega = document.getElementById('dataEntrega').value;
+            console.log('Data de Entrega:', dataEntrega);
+            event.preventDefault();
+        });
+        
     </script>
 </body>
 

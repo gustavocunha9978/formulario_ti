@@ -3,18 +3,22 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const cron = require('node-cron');
+const PORT = 3001;
+
 require('dotenv').config();
 
+const ABSOLUTE_PATH = process.env.ABSOLUTE_PATH || path.join(__dirname, 'public');
 
-const absolutePath = "C:\\Users\\gustavo.santos\\Documents\\GitHub\\formulario_ti_v2";
-
-app.use(express.static(absolutePath));
+app.use(express.static(ABSOLUTE_PATH));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/sendmail", async (req, res) => {
-    console.log(request.body);
+let dataDevolucao = null;
 
-    const formData = request.body;
+app.post("/sendmail", async (req, res) => {
+    console.log(req.body);
+
+    const formData = req.body;
     const mail = formData.emailget;
 
     const transport = nodemailer.createTransport({
@@ -29,31 +33,42 @@ app.post("/sendmail", async (req, res) => {
     try {
         let message = await transport.sendMail({
             from: '"Gustavo Cunha" <ti@sorrisodetoledo.com.br>',
-            to: `${mail}, ti@sorrisodetoledo.com.br`,// mudar o email aqui 
+            to: `${mail}, ti@sorrisodetoledo.com.br`,
             subject: "Formulário",
             text: `
                 Item: ${formData.Item}
                 Data de Entrega: ${formData.dataEntrega}
-                Data de Devolução: ${fomatData.dataDevolução}
+                Data de Devolução: ${formData.dataDevolucao || ''}
                 Nome do Responsável pela Entrega: ${formData.responsavel}
                 Nome do Receptor: ${formData.receptor}
                 Departamento/Setor: ${formData.departamento}
-                Observações: ${formData.observacoes}
+                Observações: ${formData.observacoes || ''}
             `
         });
 
-        response.send("Deu boa!");
+        if (dataDevolucao && formData.checkbox) {
+            // Enviar e-mail de devolução
+            let devolucaoMessage = await transport.sendMail({
+                from: '"Gustavo Cunha" <ti@sorrisodetoledo.com.br>',
+                to: `${mail}, ti@sorrisodetoledo.com.br`,
+                subject: "Devolução de Equipamento",
+                text: 'O equipamento que foi emprestado á você precisa ser devolvido até as 17:00h'
+            });
+            console.log("E-mail de devolução enviado com sucesso:", devolucaoMessage);
+        }
+
     } catch (error) {
         console.error("Erro ao enviar o email:", error);
-        response.status(500).send("Deu ruim.");
     }
+
+    res.send("<span>OK</span>");
 });
 
-app.get('/', (request, response) => {
-    res.sendFile(path.join(absolutePath, 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(ABSOLUTE_PATH, 'index.html'));
 });
 
-const PORT = 3001;
+
 app.listen(PORT, () => {
-    console.log(`Server on http://10.0.8.50:${PORT}`);
+    console.log(`Server on http://10.0.8.160:${PORT}`);
 });
