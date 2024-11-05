@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+      "incremental": true,
+      "target": "ES2020",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "./",
+      "strict": true,
+      "strictPropertyInitialization": false,
+      "baseUrl": "./src",
+      "allowJs": false,
+      "resolveJsonModule": true,
+      "paths": {
+        "@module": ["module/*"],
+        "@infra/*": ["infra/*"],
+        "@domain/*": ["domain/*"],
+        "@config/*": ["config/*"],
+        "@shared/*": ["shared/*"]
+      },
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "forceConsistentCasingInFileNames": true,
+      "strictNullChecks": false,
+      "skipLibCheck": true
+    },
+    "exclude": [
+      "node_modules",
+      "./jest.config.js",
+      "./prettier",
+      "coverage",
+      "dist",
+      "./babel.config.js",
+      "./ormconfig.js"
+    ]
+  }
+  
