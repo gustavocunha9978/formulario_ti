@@ -55,7 +55,7 @@ app.post("/sendmail", async (req, res) => {
 
         if (dataDevolucao && formData.checkbox) {
             let devolucaoMessage = await transport.sendMail({
-                from: '"Gustavo Cunha" <gustavo.cunha@biopark.com.br>',
+                from:process.env.EMAIL_USER,
                 to: `${mail}, gustavo.cunha@biopark.com.br`,
                 subject: "Devolução de Equipamento",
                 text: 'O equipamento que foi emprestado á você precisa ser devolvido até as 17:00h'
