@@ -13,16 +13,24 @@
   "dependencies": {
     "app": "^0.1.0",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
     "os": "^0.1.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "register": "^0.0.0",
+    "routes": "^2.1.0",
+    "tsconfig-paths": "^4.2.0"
   },
   "repository": {
     "type": "git",
     "url": "formulario "
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0"
   }
 }

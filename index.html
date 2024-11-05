@@ -10,10 +10,10 @@
 <body>
     <h2>Formulário</h2>
 
-    <form action="http://localhost:3001/sendmail" method="POST">
+    <form id="formEmail" onsubmit="sendEmail(event)">
         <div class="form-group">
-            <label for="email">Destinatário:</label>
-            <input type="emailget" id="emailget" name="emailget" required>
+            <label for="emailget">Destinatário:</label>
+            <input type="email" id="emailget" name="emailget" required>
         </div>
 
         <div class="form-group">
@@ -25,7 +25,6 @@
             <label for="dataEntrega">Data de Entrega:</label>
             <input type="date" id="dataEntrega" name="dataEntrega" required>
         </div>
-
 
         <div class="checkbox-wrapper">
             <input id="terms-checkbox-37" name="checkbox" type="checkbox">
@@ -43,10 +42,9 @@
         </div>
 
         <div class="form-group" id="divDataDevolução" style="display: none;">
-            <label for="Devolução">Data de Devolução</label>
+            <label for="dataDevolução">Data de Devolução</label>
             <input type="date" id="dataDevolução" name="dataDevolução"> 
         </div>
-
 
         <div class="form-group">
             <label for="responsavel">Nome do Responsável pela Entrega:</label>
@@ -70,35 +68,54 @@
 
         <button type="submit">Enviar</button>
         <button type="button" onclick="limparFormulario()">Limpar</button>
-
     </form>
+
+    <div id="loading" style="display:none;">Enviando email, por favor aguarde...</div>
+    <div id="log"></div>
+
     <script>
+        async function sendEmail(event) {
+            event.preventDefault();
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('log').innerText = '';
+        
+            const formData = new FormData(document.getElementById('formEmail'));
+        
+            try {
+                const response = await fetch('http://localhost:3001/sendmail', {
+                    method: 'POST',
+                    body: new URLSearchParams(formData)
+                });
+        
+                console.log("Status HTTP:", response.status);
+        
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log("Resposta do servidor:", result);
+                    document.getElementById('log').innerText = result.message;
+                } else {
+                    document.getElementById('log').innerText = "Erro ao enviar o email. Código de status: " + response.status;
+                    console.error("Resposta de erro recebida:", await response.text());
+                }
+            } catch (error) {
+                console.error("Erro ao enviar o email:", error);
+                document.getElementById('log').innerText = "Erro ao enviar o email.";
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
         function limparFormulario() {
-            document.getElementById("emailget").value = "";
-            document.getElementById("Item").value = ""; 
-            document.getElementById("dataEntrega").value = "";
-            document.getElementById("dataDevolução").value = "";
-            document.getElementById("responsavel").value = "";
-            document.getElementById("receptor").value = "";
-            document.getElementById("departamento").value = "";
-            document.getElementById("observacoes").value = "";
+            document.getElementById("formEmail").reset();
+            document.getElementById("terms-checkbox-37").checked = false;
+            document.getElementById("divDataDevolução").style.display = "none";
+            document.getElementById("log").innerText = '';
         }
 
         document.getElementById('terms-checkbox-37').addEventListener('change', function () {
             const divDataDevolução = document.getElementById('divDataDevolução');
-            if (this.checked) {
-                divDataDevolução.style.display = "block";
-            } else {
-                divDataDevolução.style.display = "none";
-            }
+            divDataDevolução.style.display = this.checked ? "block" : "none";
         });
-
-        document.getElementById('formEmail').addEventListener('submit', function (event) {
-            const dataEntrega = document.getElementById('dataEntrega').value;
-            console.log('Data de Entrega:', dataEntrega);
-            event.preventDefault();
-        });
-        
     </script>
 </body>
 
