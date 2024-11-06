@@ -1,7 +1,6 @@
 {
   "name": "coisas",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000f\u0000o\u0000r\u0000m\u0000u\u0000l\u0000a\u0000r\u0000i\u0000o\u0000\r\u0000 \u0000#\u0000 \u0000f\u0000o\u0000r\u0000m\u0000u\u0000l\u0000a\u0000r\u0000i\u0000o\u0000_\u0000t\u0000i\u0000_\u0000v\u00002\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "formulario "
+    "url": "formulario"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

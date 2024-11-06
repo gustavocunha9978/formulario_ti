@@ -1,0 +1,15 @@
+services:
+  postgres:
+      build:
+        context: ./postgres
+      container_name: post-ativos
+      tty: true
+      volumes:
+        - ./postgres/postgres_data:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      ports:
+        - 5437:5432
+      networks:
+        - ativos
